@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://asm_api/schemas"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://asm_api/schemas">
+
+	<!-- Elements -->
+	<xs:element name="getDeviceRequest">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="service_version" type="xs:float" />	
+				<xs:element name="id" type="xs:int" />	
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getDeviceResponse">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="device_info" type="deviceInfo"
+                     minOccurs="0" />
+				<xs:element name="status" type="statusResponse" maxOccurs="1"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getDeviceListRequest">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="service_version" type="xs:float" />					
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+    <xs:element name="getDeviceListResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="deviceList" type="deviceList" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+	<xs:element name="createOrUpdateDeviceRequest">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="service_version" type="xs:float" />	
+				<xs:element name="id" type="xs:int" />
+				<xs:element name="name" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="createOrUpdateDeviceResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="statusResponse" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteDeviceRequest">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="service_version" type="xs:float" />	
+				<xs:element name="id" type="xs:int" />	
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteDeviceResponse">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="status" type="statusResponse" maxOccurs="1"/>
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+	
+	<!-- Types -->
+    <xs:complexType name="deviceList">
+            <xs:sequence>
+                <xs:element name="device_info" maxOccurs="unbounded" minOccurs="0" type="deviceInfo" />
+            </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="deviceInfo">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+			<xs:element name="name" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="statusResponse">
+		<xs:sequence>
+			<xs:element name="id" type="xs:int" />
+            <xs:element name="description" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
