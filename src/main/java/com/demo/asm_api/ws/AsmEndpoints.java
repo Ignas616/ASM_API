@@ -1,8 +1,8 @@
 package com.demo.asm_api.ws;
 
 import com.demo.asm_api.model.device.Device;
-import generatedSoapApi.*;
 import com.demo.asm_api.services.device.DeviceService;
+import generatedSoapApi.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -10,6 +10,13 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import java.util.List;
+
+/**
+ * This class is used for publish methods that can be used to start an endpoint,
+ * at which point it starts accepting incoming requests.
+ *
+ * @author Ignas Nikolajev
+ */
 
 @Endpoint
 public class AsmEndpoints {
@@ -19,6 +26,11 @@ public class AsmEndpoints {
     @Autowired
     private DeviceService deviceService;
 
+
+    /**
+     * This method is used to get the device details
+     *
+     */
     @PayloadRoot(localPart = "getDeviceRequest", namespace = ENDPOINT_NAMESPACE)
     @ResponsePayload
     public GetDeviceResponse handleGetDeviceRequest(
@@ -27,7 +39,7 @@ public class AsmEndpoints {
         StatusResponse tmpStatusResponse = new StatusResponse();
         DeviceInfo tmpDeviceInfo = new DeviceInfo();
         int requestDeviceId = request.getId();
-        Device tmpDevice = null;
+        Device tmpDevice;
         if (requestDeviceId == 0)
         {
             tmpStatusResponse.setId(0);
@@ -60,7 +72,10 @@ public class AsmEndpoints {
         return response;
     }
 
-
+    /**
+     * This method is used to get the device list
+     *
+     */
     @PayloadRoot(localPart = "getDeviceListRequest", namespace = ENDPOINT_NAMESPACE)
     @ResponsePayload
     public GetDeviceListResponse handleGetDeviceListRequest(
@@ -79,14 +94,16 @@ public class AsmEndpoints {
         return response;
     }
 
-
+    /**
+     * This method is used to get create the device or update device details
+     *
+     */
     @PayloadRoot(localPart = "createOrUpdateDeviceRequest", namespace = ENDPOINT_NAMESPACE)
     @ResponsePayload
     public CreateOrUpdateDeviceResponse handleCreateOrUpdateDeviceRequest(
             @RequestPayload CreateOrUpdateDeviceRequest request) {
         CreateOrUpdateDeviceResponse response = new CreateOrUpdateDeviceResponse();
         StatusResponse tmpStatusResponse = new StatusResponse();
-        DeviceInfo tmpDeviceInfo = new DeviceInfo();
         int requestDeviceId = request.getId();
         String requestDeviceName = request.getName();
         Device tmpDevice;
@@ -121,6 +138,7 @@ public class AsmEndpoints {
             response.setStatus(tmpStatusResponse);
             return response;
         }  else {
+            tmpDevice = new Device();
             tmpDevice.setId(requestDeviceId);
             tmpDevice.setName(requestDeviceName);
             try {
@@ -139,13 +157,16 @@ public class AsmEndpoints {
 
     }
 
+    /**
+     * This method is used to delete the device details
+     *
+     */
     @PayloadRoot(localPart = "deleteDeviceRequest", namespace = ENDPOINT_NAMESPACE)
     @ResponsePayload
     public DeleteDeviceResponse handleDeleteDeviceRequest(
             @RequestPayload DeleteDeviceRequest request) {
         DeleteDeviceResponse response = new DeleteDeviceResponse();
         StatusResponse tmpStatusResponse = new StatusResponse();
-        DeviceInfo tmpDeviceInfo = new DeviceInfo();
         int requestDeviceId = request.getId();
 
         Device tmpDevice;

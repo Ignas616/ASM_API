@@ -1,8 +1,7 @@
 package com.demo.asm_api.model.device;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "device")

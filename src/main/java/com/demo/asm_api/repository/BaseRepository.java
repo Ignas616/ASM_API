@@ -11,14 +11,14 @@ public interface BaseRepository {
     /**
      * Stores given entity to database
      *
-     * @param entity
+     * @param entity  Some entity object to save
      */
     void save(Object entity);
 
     /**
      * Stores collection of entities to database
      *
-     * @param entities
+     * @param entities  Some entities objects to save
      */
     void saveAll(Collection<?> entities);
 
@@ -26,14 +26,14 @@ public interface BaseRepository {
     /**
      * Removes given entity from database
      *
-     * @param entity
+     * @param entity Some entity object to delete
      */
     void delete(Object entity);
 
     /**
      * Removed collection of entities from database
      *
-     * @param entities
+     * @param entities Some entities objects to delete
      */
     void deleteAll(Collection<?> entities);
 
@@ -41,7 +41,7 @@ public interface BaseRepository {
      * Load entity from database by it's ID
      *
      * @param clazz Class of an entity object
-     * @param id
+     * @param id Entity unique id
      * @return entity object or null if object is not found
      */
     <T> T get(Class<T> clazz, Serializable id);
