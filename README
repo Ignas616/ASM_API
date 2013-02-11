@@ -64,7 +64,7 @@ Seting up the war
 1) Copy the newly created asm_api.war to the JETTY_HOME/webapps folder
 2) go back to jetty home and launch the jetty server with the command
 java - jar start.jar
-3) Open browser and check that the wsld file is launched http://localhost:8080/asm_api/asm_api.wsdl
+3) Open browser and check that the wsdl file is launched http://localhost:8080/asm_api/asm_api.wsdl
 
 
 
